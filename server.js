@@ -3,7 +3,8 @@ import express from 'express'
 //Routes
 import productoRouter from './Routes/producto-routes.js'
 import usuarioRouter from './Routes/usuario-routes.js'
-
+import carroComprasRouter from './Routes/carro-compras-routes.js'
+import carroComprasProductosRouter from './Routes/carro-compras-productos-routes.js'
 
 import { sequelize } from './Database/database.js';
 import cors from 'cors';
@@ -22,6 +23,8 @@ app.use(express.json());
 //middleware es una función que tiene acceso a request y response de la funcion
 app.use(productoRouter);
 app.use(usuarioRouter);
+app.use(carroComprasRouter);
+app.use(carroComprasProductosRouter);
 
 //Establecer puerto
 app.set('port', 3000);
