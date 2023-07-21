@@ -1,6 +1,10 @@
 import express from 'express'
-//const routes = require('./Routes/routes');
-import router from './Routes/routes.js'
+
+//Routes
+import productoRouter from './Routes/producto-routes.js'
+import usuarioRouter from './Routes/usuario-routes.js'
+
+
 import { sequelize } from './Database/database.js';
 import cors from 'cors';
 
@@ -16,7 +20,8 @@ app.use(express.json());
 
 //Montar enrutador con middleware app.use
 //middleware es una función que tiene acceso a request y response de la funcion
-app.use(router);
+app.use(productoRouter);
+app.use(usuarioRouter);
 
 //Establecer puerto
 app.set('port', 3000);
