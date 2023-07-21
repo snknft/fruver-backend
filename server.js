@@ -5,6 +5,7 @@ import productoRouter from './Routes/producto-routes.js'
 import usuarioRouter from './Routes/usuario-routes.js'
 import carroComprasRouter from './Routes/carro-compras-routes.js'
 import carroComprasProductosRouter from './Routes/carro-compras-productos-routes.js'
+import facturaRouter from './Routes/factura-routes.js'
 
 import { sequelize } from './Database/database.js';
 import cors from 'cors';
@@ -25,6 +26,7 @@ app.use(productoRouter);
 app.use(usuarioRouter);
 app.use(carroComprasRouter);
 app.use(carroComprasProductosRouter);
+app.use(facturaRouter);
 
 //Establecer puerto
 app.set('port', 3000);
