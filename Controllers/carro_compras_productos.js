@@ -19,6 +19,16 @@ const getCarroComprasProductos = async (req, res) => {
     });
 };
 
+const findCompraDetalle = async (req, res) => {  
+    const { carro_compras_id } = req.params; 
+    await CarroComprasProductos.findAll({where: {carro_compras_id: carro_compras_id}})
+    .then(response => {
+        res.status(200).json(response);
+    }).catch((error) => {
+        res.status(400).json({mensaje: error});
+    });
+};
+
 const getCarroComprasProducto = async (req, res) => {  
     const { id } = req.params; 
     await CarroComprasProductos.findByPk(id)
@@ -79,6 +89,7 @@ const deleteCarroComprasProductos = async (req, res) => {
 export {
     getCarroComprasProductos,
     getCarroComprasProducto,
+    findCompraDetalle,
     postCarroComprasProductos,
     putCarroComprasProductos,
     deleteCarroComprasProductos

@@ -30,8 +30,8 @@ const getProducto = async (req, res) => {
 };
 
 const postProductos = async (req, res) => {
-    const { tipo, nombre, descripcion, valor_unitario, cantidad_stock } = req.body;
-    await Producto.create({ tipo, nombre, descripcion, valor_unitario, cantidad_stock })
+    const { tipo, nombre, descripcion, imagen, valor_unitario, cantidad_stock } = req.body;
+    await Producto.create({ tipo, nombre, descripcion, imagen, valor_unitario, cantidad_stock })
     .then(response => {
         res.status(200).json(response);
     }).catch((error) => {

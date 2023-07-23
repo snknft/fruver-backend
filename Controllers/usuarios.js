@@ -29,6 +29,16 @@ const getUsuario = async (req, res) => {
     });
 };
 
+const findUser = async (req, res) => {  
+    const { tipo, cedula } = req.params; 
+    await Usuario.findOne({where: {tipo: tipo, cedula: cedula}})
+    .then(response => {
+        res.status(200).json(response);
+    }).catch((error) => {
+        res.status(400).json({mensaje: error});
+    });
+};
+
 const postUsuarios = async (req, res) => {
     const { cedula, tipo } = req.body;
     await Usuario.create({ cedula, tipo })
@@ -79,6 +89,7 @@ const deleteUsuarios = async (req, res) => {
 export {
     getUsuarios,
     getUsuario,
+    findUser,
     postUsuarios,
     putUsuarios,
     deleteUsuarios

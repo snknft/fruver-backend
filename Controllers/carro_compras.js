@@ -29,6 +29,16 @@ const getCarroCompra = async (req, res) => {
     });
 };
 
+const findCarroCompra = async (req, res) => {  
+    const { cliente_id, estado } = req.params; 
+    await CarroCompras.findOne({where: {cliente_id: cliente_id, estado: estado}})
+    .then(response => {
+        res.status(200).json(response);
+    }).catch((error) => {
+        res.status(400).json({mensaje: error});
+    });
+};
+
 const postCarroCompras = async (req, res) => {
     const { cliente_id, estado } = req.body;
     await CarroCompras.create({ cliente_id, estado})
@@ -79,6 +89,7 @@ const deleteCarroCompras = async (req, res) => {
 export {
     getCarroCompras,
     getCarroCompra,
+    findCarroCompra,
     postCarroCompras,
     putCarroCompras,
     deleteCarroCompras

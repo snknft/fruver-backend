@@ -10,6 +10,7 @@ CREATE TABLE productos (
     tipo ENUM('F', 'V', 'G') NOT NULL COMMENT 'Tipo de producto: Frutas (F), Verduras (V) o Granos (G)',
     nombre VARCHAR(50) NOT NULL COMMENT 'Nombre del producto',
     descripcion VARCHAR(250) NOT NULL COMMENT 'Descripción del producto',
+    imagen LONGTEXT COMMENT 'Imagen del producto',
     valor_unitario DECIMAL(10, 2) NOT NULL COMMENT 'Valor unitario del producto',
     cantidad_stock INT NOT NULL COMMENT 'Cantidad en stock del producto',
     UNIQUE INDEX idx_tipo_nombre (tipo, nombre)
@@ -28,7 +29,7 @@ CREATE TABLE carro_compras (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cliente_id INT NOT NULL COMMENT 'ID del cliente',
     estado ENUM('P', 'F') NOT NULL COMMENT 'Estado del carro de compras: Pendiente (P) o Finalizado (F)',
-    FOREIGN KEY (cliente_id) REFERENCES usuarios(id) -- Relación con la tabla de usuarios
+    FOREIGN KEY (cliente_id) REFERENCES usuarios(id) ON DELETE CASCADE -- Relación con la tabla de usuarios
 );
 
 -- Crear la tabla para la relación entre carros de compras y productos
@@ -37,8 +38,8 @@ CREATE TABLE carro_compras_productos (
     carro_compras_id INT NOT NULL COMMENT 'ID del carro de compras',
     producto_id INT NOT NULL COMMENT 'ID del producto',
     cantidad_producto INT NOT NULL COMMENT 'Cantidad del producto en el carro de compras',
-    FOREIGN KEY (carro_compras_id) REFERENCES carro_compras(id), -- Relación con la tabla de carros de compras
-    FOREIGN KEY (producto_id) REFERENCES productos(id) -- Relación con la tabla de productos
+    FOREIGN KEY (carro_compras_id) REFERENCES carro_compras(id) ON DELETE CASCADE, -- Relación con la tabla de carros de compras
+    FOREIGN KEY (producto_id) REFERENCES productos(id) ON DELETE CASCADE-- Relación con la tabla de productos
 );
 
 -- Crear la tabla de facturas
@@ -46,7 +47,7 @@ CREATE TABLE facturas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     carro_compras_id INT NOT NULL COMMENT 'ID del carro de compras asociado a la factura',
     monto_total DECIMAL(10, 2) NULL COMMENT 'Monto total de la factura',
-    FOREIGN KEY (carro_compras_id) REFERENCES carro_compras(id) -- Relación con la tabla de carros de compras
+    FOREIGN KEY (carro_compras_id) REFERENCES carro_compras(id) ON DELETE CASCADE-- Relación con la tabla de carros de compras
 );
 
 

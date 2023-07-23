@@ -23,6 +23,10 @@ const Producto = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    imagen: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
     valor_unitario: {
       type: DataTypes.DECIMAL,
       allowNull: false,
